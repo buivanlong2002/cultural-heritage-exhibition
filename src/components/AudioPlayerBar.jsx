@@ -24,13 +24,14 @@ export default function AudioPlayerBar({
 
   return (
     <div
+      className="audio-floating-player"
       style={{
         position: 'fixed',
-        bottom: '20px',
+        bottom: 'max(16px, env(safe-area-inset-bottom, 16px))',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: 'calc(100% - 32px)',
-        maxWidth: '720px',
+        width: 'calc(100% - 24px)',
+        maxWidth: '680px',
         zIndex: 9900,
         animation: 'slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
       }}
@@ -39,13 +40,14 @@ export default function AudioPlayerBar({
         style={{
           background: 'var(--audio-bar-bg)',
           backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
           border: '1.5px solid var(--audio-bar-border)',
-          borderRadius: '20px',
-          padding: '12px 18px',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.16), 0 0 1px rgba(0,0,0,0.2)',
+          borderRadius: '18px',
+          padding: '10px 14px',
+          boxShadow: '0 12px 35px rgba(0, 0, 0, 0.16)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '8px',
+          gap: '6px',
           transition: 'all 0.3s ease'
         }}
       >
@@ -53,7 +55,7 @@ export default function AudioPlayerBar({
         <div
           style={{
             width: '100%',
-            height: '3.5px',
+            height: '3px',
             background: 'var(--border-subtle)',
             borderRadius: '2px',
             overflow: 'hidden'
@@ -75,26 +77,26 @@ export default function AudioPlayerBar({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '10px'
+            gap: '6px'
           }}
         >
           {/* Status & Waveform Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: '130px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: '95px' }}>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'flex-end',
                 gap: '2px',
-                height: '18px',
-                padding: '0 4px'
+                height: '16px',
+                padding: '0 2px'
               }}
             >
               {[0.4, 0.9, 0.6, 1.0, 0.5].map((scale, i) => (
                 <span
                   key={i}
                   style={{
-                    width: '3.5px',
-                    height: isPlaying ? `${scale * 16}px` : '4px',
+                    width: '3px',
+                    height: isPlaying ? `${scale * 14}px` : '3px',
                     background: 'var(--gold-accent)',
                     borderRadius: '2px',
                     transition: 'height 0.2s ease',
@@ -105,79 +107,82 @@ export default function AudioPlayerBar({
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '0.74rem', color: 'var(--gold-accent)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                {language === 'vi' ? 'THUYẾT MINH ÂM THANH' : 'AUDIO GUIDE'}
+              <span style={{ fontSize: '0.68rem', color: 'var(--gold-accent)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                AUDIO GUIDE
               </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-title)', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-title)', fontWeight: 700 }}>
                 {language === 'vi'
-                  ? `Đoạn ${currentChunk} / ${totalParagraphs}`
-                  : `Section ${currentChunk} / ${totalParagraphs}`}
+                  ? `${currentChunk}/${totalParagraphs}`
+                  : `${currentChunk}/${totalParagraphs}`}
               </span>
             </div>
           </div>
 
           {/* Central Playback Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <button
               onClick={onPrev}
               disabled={currentParagraphIndex <= 0}
               title={language === 'vi' ? 'Đoạn trước' : 'Previous section'}
+              aria-label="Đoạn trước"
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
                 color: currentParagraphIndex <= 0 ? 'var(--text-muted)' : 'var(--text-title)',
                 borderRadius: '50%',
-                width: '36px',
-                height: '36px',
+                width: '34px',
+                height: '34px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: currentParagraphIndex <= 0 ? 'not-allowed' : 'pointer',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
+                boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
               }}
             >
-              <SkipBack size={15} />
+              <SkipBack size={14} />
             </button>
 
             {isPlaying ? (
               <button
                 onClick={onPause}
                 title={language === 'vi' ? 'Tạm dừng' : 'Pause'}
+                aria-label="Tạm dừng"
                 style={{
                   background: 'var(--gold-gradient)',
                   border: 'none',
                   color: '#ffffff',
                   borderRadius: '50%',
-                  width: '44px',
-                  height: '44px',
+                  width: '42px',
+                  height: '42px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(217, 119, 6, 0.45)'
+                  boxShadow: '0 4px 12px rgba(217, 119, 6, 0.45)'
                 }}
               >
-                <Pause size={18} fill="#ffffff" />
+                <Pause size={17} fill="#ffffff" />
               </button>
             ) : (
               <button
                 onClick={isPaused ? onResume : onPlay}
                 title={language === 'vi' ? 'Phát thuyết minh' : 'Play guide'}
+                aria-label="Phát thuyết minh"
                 style={{
                   background: 'var(--gold-gradient)',
                   border: 'none',
                   color: '#ffffff',
                   borderRadius: '50%',
-                  width: '44px',
-                  height: '44px',
+                  width: '42px',
+                  height: '42px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(217, 119, 6, 0.45)'
+                  boxShadow: '0 4px 12px rgba(217, 119, 6, 0.45)'
                 }}
               >
-                <Play size={18} fill="#ffffff" style={{ marginLeft: '2px' }} />
+                <Play size={17} fill="#ffffff" style={{ marginLeft: '2px' }} />
               </button>
             )}
 
@@ -185,26 +190,27 @@ export default function AudioPlayerBar({
               onClick={onNext}
               disabled={currentParagraphIndex >= totalParagraphs - 1}
               title={language === 'vi' ? 'Đoạn tiếp theo' : 'Next section'}
+              aria-label="Đoạn tiếp theo"
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
                 color: currentParagraphIndex >= totalParagraphs - 1 ? 'var(--text-muted)' : 'var(--text-title)',
                 borderRadius: '50%',
-                width: '36px',
-                height: '36px',
+                width: '34px',
+                height: '34px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: currentParagraphIndex >= totalParagraphs - 1 ? 'not-allowed' : 'pointer',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
+                boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
               }}
             >
-              <SkipForward size={15} />
+              <SkipForward size={14} />
             </button>
           </div>
 
           {/* Right Action Controls: Auto-Scroll, Speed, Stop */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
             {/* Auto-scroll toggle */}
             <button
               onClick={onToggleAutoScroll}
@@ -213,17 +219,18 @@ export default function AudioPlayerBar({
                   ? language === 'vi' ? 'Tự cuộn màn hình: Đang BẬT' : 'Auto-scroll: ON'
                   : language === 'vi' ? 'Tự cuộn màn hình: Đang TẮT' : 'Auto-scroll: OFF'
               }
+              aria-label="Tự cuộn"
               style={{
-                padding: '7px 11px',
-                borderRadius: '9px',
+                padding: '6px 9px',
+                borderRadius: '8px',
                 background: autoScroll ? 'var(--gold-subtle)' : 'var(--bg-card)',
                 border: autoScroll ? '1px solid var(--gold-accent)' : '1px solid var(--border-subtle)',
                 color: autoScroll ? 'var(--gold-accent)' : 'var(--text-muted)',
-                fontSize: '0.74rem',
+                fontSize: '0.72rem',
                 fontWeight: 700,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
+                gap: '3px',
                 cursor: 'pointer'
               }}
             >
@@ -234,14 +241,15 @@ export default function AudioPlayerBar({
             {/* Playback speed */}
             <button
               onClick={onChangeRate}
-              title={language === 'vi' ? 'Thay đổi tốc độ đọc' : 'Change playback speed'}
+              title={language === 'vi' ? 'Thay đổi tốc độ đọc' : 'Playback speed'}
+              aria-label="Tốc độ đọc"
               style={{
-                padding: '7px 10px',
-                borderRadius: '9px',
+                padding: '6px 8px',
+                borderRadius: '8px',
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
                 color: 'var(--text-title)',
-                fontSize: '0.74rem',
+                fontSize: '0.72rem',
                 fontWeight: 700,
                 cursor: 'pointer'
               }}
@@ -253,9 +261,10 @@ export default function AudioPlayerBar({
             <button
               onClick={onToggleAmbient}
               title={isAmbientPlaying ? (language === 'vi' ? 'Tắt nhạc thiền' : 'Mute ambient chime') : (language === 'vi' ? 'Bật nhạc thiền' : 'Play ambient chime')}
+              aria-label="Nhạc thiền"
               style={{
-                padding: '7px 9px',
-                borderRadius: '9px',
+                padding: '6px 7px',
+                borderRadius: '8px',
                 background: isAmbientPlaying ? 'rgba(42, 111, 103, 0.15)' : 'var(--bg-card)',
                 border: isAmbientPlaying ? '1px solid #2a6f67' : '1px solid var(--border-subtle)',
                 color: isAmbientPlaying ? '#2a6f67' : 'var(--text-muted)',
@@ -265,16 +274,17 @@ export default function AudioPlayerBar({
                 cursor: 'pointer'
               }}
             >
-              <Music size={14} />
+              <Music size={13} />
             </button>
 
             {/* Stop button */}
             <button
               onClick={onStop}
               title={language === 'vi' ? 'Dừng thuyết minh' : 'Stop audio'}
+              aria-label="Dừng thuyết minh"
               style={{
-                padding: '7px 9px',
-                borderRadius: '9px',
+                padding: '6px 7px',
+                borderRadius: '8px',
                 background: 'rgba(239, 68, 68, 0.1)',
                 border: '1px solid rgba(239, 68, 68, 0.25)',
                 color: '#dc2626',
@@ -284,7 +294,7 @@ export default function AudioPlayerBar({
                 cursor: 'pointer'
               }}
             >
-              <Square size={13} fill="#dc2626" />
+              <Square size={12} fill="#dc2626" />
             </button>
           </div>
         </div>

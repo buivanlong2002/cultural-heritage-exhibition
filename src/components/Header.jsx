@@ -22,138 +22,121 @@ export default function Header({
         zIndex: 9000,
         background: 'var(--bg-header)',
         backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         borderBottom: '1px solid var(--border-gold)',
-        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+        boxShadow: '0 4px 18px rgba(0, 0, 0, 0.04)',
         transition: 'background-color 0.3s ease, border-color 0.3s ease'
       }}
     >
-      {/* Top Banner Row */}
+      {/* Top Mobile-Friendly App Bar */}
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '12px 18px',
+          padding: '10px 14px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '12px'
+          gap: '8px'
         }}
       >
         {/* Brand / Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flex: 1 }}>
           <div
             style={{
-              width: '40px',
-              height: '40px',
+              width: '36px',
+              height: '36px',
               borderRadius: '10px',
               background: 'var(--gold-gradient)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 4px 12px rgba(217, 119, 6, 0.3)',
+              boxShadow: '0 3px 10px rgba(217, 119, 6, 0.3)',
               color: '#ffffff',
-              fontWeight: 800
+              fontWeight: 800,
+              flexShrink: 0
             }}
           >
-            <Landmark size={22} />
+            <Landmark size={20} />
           </div>
 
-          <div>
-            <div style={{ fontSize: '0.68rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gold-accent)', fontWeight: 700 }}>
-              {language === 'vi' ? 'BẢO TÀNG SỐ DI SẢN' : 'DIGITAL HERITAGE MUSEUM'}
+          <div style={{ minWidth: 0, overflow: 'hidden' }}>
+            <div style={{ fontSize: '0.62rem', letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--gold-accent)', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {language === 'vi' ? 'BẢO TÀNG SỐ DI SẢN' : 'DIGITAL HERITAGE'}
             </div>
-            <h1 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-title)', fontFamily: "var(--font-serif)" }}>
-              {language === 'vi' ? 'Triển Lãm Di Sản Văn Hóa' : 'Cultural Heritage Exhibition'}
+            <h1 style={{ margin: 0, fontSize: '0.96rem', fontWeight: 700, color: 'var(--text-title)', fontFamily: "var(--font-serif)", whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {language === 'vi' ? 'Triển Lãm Di Sản' : 'Heritage Exhibition'}
             </h1>
           </div>
         </div>
 
-        {/* Action Controls: Audio, Ambient, Language Toggle, Theme, QR Station */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Action Controls: Compact and Thumb-Friendly */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
           {/* Audio Quick Trigger */}
           <button
             onClick={onStartAudio}
-            title={language === 'vi' ? 'Bắt đầu thuyết minh âm thanh' : 'Start audio guide'}
+            title={language === 'vi' ? 'Bật thuyết minh âm thanh' : 'Start audio guide'}
+            aria-label="Thuyết minh âm thanh"
             style={{
-              padding: '7px 12px',
-              borderRadius: '10px',
+              padding: '6px 10px',
+              borderRadius: '9px',
               background: isAudioPlaying ? 'var(--gold-gradient)' : 'var(--gold-subtle)',
               border: '1px solid var(--border-gold)',
               color: isAudioPlaying ? '#ffffff' : 'var(--gold-accent)',
               fontWeight: 700,
-              fontSize: '0.8rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              boxShadow: isAudioPlaying ? '0 0 12px rgba(217, 119, 6, 0.4)' : 'none'
-            }}
-          >
-            <Volume2 size={16} />
-            <span className="hide-on-mobile">
-              {isAudioPlaying
-                ? (language === 'vi' ? 'Đang đọc...' : 'Playing...')
-                : (language === 'vi' ? 'Nghe Audio' : 'Audio Tour')}
-            </span>
-          </button>
-
-          {/* Ambient Bell Music */}
-          <button
-            onClick={onToggleAmbient}
-            title={language === 'vi' ? 'Nhạc chuông thiền truyền thống' : 'Ambient temple chime'}
-            style={{
-              padding: '7px 10px',
-              borderRadius: '10px',
-              background: isAmbientPlaying ? 'rgba(42, 111, 103, 0.15)' : 'var(--bg-card-subtle)',
-              border: isAmbientPlaying ? '1px solid #2a6f67' : '1px solid var(--border-subtle)',
-              color: isAmbientPlaying ? '#2a6f67' : 'var(--text-secondary)',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               display: 'flex',
               alignItems: 'center',
               gap: '4px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              boxShadow: isAudioPlaying ? '0 0 10px rgba(217, 119, 6, 0.4)' : 'none'
             }}
           >
-            <Music size={15} />
-            <span className="hide-on-mobile">{language === 'vi' ? 'Nhạc thiền' : 'Ambient'}</span>
+            <Volume2 size={15} />
+            <span>
+              {isAudioPlaying
+                ? (language === 'vi' ? 'Đang đọc' : 'Playing')
+                : (language === 'vi' ? 'Nghe' : 'Audio')}
+            </span>
           </button>
 
           {/* Language Switcher (Hình thức 2) */}
           <button
             onClick={onToggleLanguage}
             title={language === 'vi' ? 'Switch to English' : 'Chuyển sang Tiếng Việt'}
+            aria-label="Đổi ngôn ngữ"
             style={{
-              padding: '7px 11px',
-              borderRadius: '10px',
+              padding: '6px 9px',
+              borderRadius: '9px',
               background: 'var(--bg-card)',
               border: '1px solid var(--border-gold)',
-              color: 'var(--text-primary)',
+              color: 'var(--text-title)',
               fontWeight: 700,
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '4px',
               cursor: 'pointer',
-              letterSpacing: '0.5px',
               boxShadow: 'var(--shadow-card)'
             }}
           >
-            <Globe size={15} color="var(--gold-accent)" />
-            <span>{language === 'vi' ? '🇻🇳 VI | EN' : '🇬🇧 EN | VI'}</span>
+            <Globe size={14} color="var(--gold-accent)" />
+            <span>{language === 'vi' ? 'EN' : 'VI'}</span>
           </button>
 
           {/* Theme Switcher (Sáng / Tối) */}
           <button
             onClick={onToggleDarkMode}
-            title={isDarkMode ? (language === 'vi' ? 'Chuyển sang giao diện Sáng' : 'Switch to Light theme') : (language === 'vi' ? 'Chuyển sang giao diện Tối' : 'Switch to Dark theme')}
+            title={isDarkMode ? (language === 'vi' ? 'Giao diện Sáng' : 'Light Theme') : (language === 'vi' ? 'Giao diện Tối' : 'Dark Theme')}
+            aria-label="Đổi giao diện sáng tối"
             style={{
-              padding: '7px 10px',
-              borderRadius: '10px',
+              padding: '6px 8px',
+              borderRadius: '9px',
               background: 'var(--bg-card)',
               border: '1px solid var(--border-subtle)',
               color: isDarkMode ? '#ffd700' : '#b45309',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -166,35 +149,38 @@ export default function Header({
           {/* QR Station Modal Button */}
           <button
             onClick={onOpenQRModal}
-            title={language === 'vi' ? 'Mã QR 3 Gian Trưng Bày' : 'Exhibition QR Codes'}
+            title={language === 'vi' ? 'Mã QR Gian Hàng' : 'Booth QR Codes'}
+            aria-label="Mã QR"
             style={{
-              padding: '7px 11px',
-              borderRadius: '10px',
+              padding: '6px 8px',
+              borderRadius: '9px',
               background: 'var(--bg-card-subtle)',
               border: '1px solid var(--border-gold)',
               color: 'var(--gold-accent)',
-              fontSize: '0.8rem',
-              fontWeight: 600,
+              fontSize: '0.78rem',
+              fontWeight: 700,
               display: 'flex',
               alignItems: 'center',
-              gap: '5px',
+              justifyContent: 'center',
               cursor: 'pointer'
             }}
           >
             <QrCode size={16} />
-            <span className="hide-on-mobile">{language === 'vi' ? 'Mã QR Gian' : 'QR Desk'}</span>
           </button>
         </div>
       </div>
 
-      {/* 3 Booths Tab Navigation (Gian 1, Gian 2, Gian 3) */}
+      {/* 3 Booths Tab Navigation: Smooth horizontal swipe on mobile */}
       <nav
         style={{
           background: 'var(--bg-nav)',
           borderTop: '1px solid var(--border-subtle)',
           overflowX: 'auto',
           whiteSpace: 'nowrap',
-          scrollbarWidth: 'none'
+          scrollbarWidth: 'none',
+          padding: '4px 10px',
+          display: 'flex',
+          gap: '6px'
         }}
       >
         <div
@@ -202,7 +188,7 @@ export default function Header({
             maxWidth: '1200px',
             margin: '0 auto',
             display: 'flex',
-            padding: '4px 14px',
+            width: '100%',
             gap: '6px'
           }}
         >
@@ -213,38 +199,46 @@ export default function Header({
                 key={b.id}
                 onClick={() => onSelectBooth(b.id)}
                 style={{
-                  padding: '9px 16px',
-                  borderRadius: '8px',
-                  border: 'none',
-                  borderBottom: isActive ? '3px solid var(--gold-accent)' : '3px solid transparent',
+                  flex: '1 1 auto',
+                  padding: '8px 12px',
+                  borderRadius: '10px',
+                  border: isActive ? '1px solid var(--border-active-p)' : '1px solid transparent',
                   background: isActive ? 'var(--gold-subtle)' : 'transparent',
                   color: isActive ? 'var(--gold-accent)' : 'var(--text-secondary)',
-                  fontWeight: isActive ? 700 : 500,
-                  fontSize: '0.86rem',
+                  fontWeight: isActive ? 800 : 500,
+                  fontSize: '0.82rem',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px',
+                  justifyContent: 'center',
+                  gap: '6px',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease'
                 }}
               >
                 <span
                   style={{
-                    width: '20px',
-                    height: '20px',
+                    width: '18px',
+                    height: '18px',
                     borderRadius: '50%',
                     background: isActive ? 'var(--gold-accent)' : 'rgba(0,0,0,0.08)',
                     color: isActive ? '#ffffff' : 'var(--text-muted)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '0.72rem',
-                    fontWeight: 700
+                    fontSize: '0.68rem',
+                    fontWeight: 800,
+                    flexShrink: 0
                   }}
                 >
                   {b.boothNumber}
                 </span>
-                <span>{b.tag[language] || b.tag.vi}</span>
+                <span style={{ whiteSpace: 'nowrap' }}>
+                  {b.boothNumber === 1
+                    ? (language === 'vi' ? 'Di tích' : 'Relics')
+                    : b.boothNumber === 2
+                    ? (language === 'vi' ? 'Kiến trúc' : 'Architecture')
+                    : (language === 'vi' ? 'Phong tục' : 'Customs')}
+                </span>
               </button>
             );
           })}
