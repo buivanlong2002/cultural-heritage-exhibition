@@ -1,0 +1,167 @@
+:root {
+  /* Default: Bright Light Heritage (Ấm áp, sáng sủa, thanh lịch phong cách bảo tàng hoàng gia) */
+  --bg-primary: #fcfaf6;
+  --bg-secondary: #f4eee3;
+  --bg-header: rgba(255, 255, 255, 0.92);
+  --bg-nav: rgba(248, 243, 233, 0.9);
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f7f3ea;
+  --bg-active-p: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+  --border-active-p: #d97706;
+  --text-title: #1c1917;
+  --text-primary: #292524;
+  --text-secondary: #57534e;
+  --text-muted: #78716c;
+  --gold-primary: #b45309;
+  --gold-accent: #d97706;
+  --gold-light: #f59e0b;
+  --gold-subtle: rgba(217, 119, 6, 0.12);
+  --gold-gradient: linear-gradient(135deg, #d97706, #b45309);
+  --border-gold: rgba(180, 130, 40, 0.28);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 6px 20px rgba(120, 80, 20, 0.06);
+  --shadow-active: 0 8px 25px rgba(217, 119, 6, 0.22);
+  --audio-bar-bg: rgba(255, 255, 255, 0.96);
+  --audio-bar-border: rgba(180, 130, 40, 0.35);
+  --footer-bg: #f3ece0;
+  --footer-border: rgba(180, 130, 40, 0.2);
+  --font-serif: 'Cinzel', 'Playfair Display', serif;
+  --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0b0e13;
+  --bg-secondary: #13171f;
+  --bg-header: rgba(11, 14, 18, 0.88);
+  --bg-nav: rgba(8, 10, 13, 0.7);
+  --bg-card: rgba(22, 27, 36, 0.7);
+  --bg-card-subtle: rgba(24, 29, 38, 0.75);
+  --bg-active-p: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(28, 34, 44, 0.9));
+  --border-active-p: #ffd700;
+  --text-title: #ffffff;
+  --text-primary: #e5e0d8;
+  --text-secondary: #a9b3c1;
+  --text-muted: #717b8a;
+  --gold-primary: #ffd700;
+  --gold-accent: #d4af37;
+  --gold-light: #ffd700;
+  --gold-subtle: rgba(212, 175, 55, 0.15);
+  --gold-gradient: linear-gradient(135deg, #ffd700, #b8860b);
+  --border-gold: rgba(212, 175, 55, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.5);
+  --shadow-active: 0 0 24px rgba(212, 175, 55, 0.35);
+  --audio-bar-bg: rgba(15, 18, 24, 0.95);
+  --audio-bar-border: rgba(212, 175, 55, 0.5);
+  --footer-bg: rgba(8, 10, 14, 0.95);
+  --footer-border: rgba(212, 175, 55, 0.2);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.06) 0%, transparent 60%),
+    radial-gradient(circle at 100% 40%, rgba(180, 83, 9, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 0% 80%, rgba(42, 111, 103, 0.03) 0%, transparent 50%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 100% 40%, rgba(168, 43, 43, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 0% 80%, rgba(42, 111, 103, 0.04) 0%, transparent 50%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-accent);
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 40px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes wavePulse {
+  0% {
+    height: 4px;
+  }
+  100% {
+    height: 16px;
+  }
+}
+
+@keyframes subtleGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(217, 119, 6, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(217, 119, 6, 0.4);
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* Print styles for QR cards */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  header, #root > *:not(.print-container) {
+    display: none !important;
+  }
+}
