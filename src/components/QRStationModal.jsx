@@ -177,12 +177,7 @@ export default function QRStationModal({ booths, language, currentBoothId, onSel
 
         {/* 3 QR Cards Grid */}
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '16px',
-            marginBottom: '20px'
-          }}
+          className="rwd-qr-grid"
         >
           {booths.map((b) => {
             const qr = qrImages[b.id];

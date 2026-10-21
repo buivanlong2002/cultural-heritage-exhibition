@@ -20,15 +20,7 @@ export default function BoothArticle({
   const statIcons = [<Calendar size={14} />, <Award size={14} />, <MapPin size={14} />, <Clock size={14} />];
 
   return (
-    <article
-      style={{
-        maxWidth: '860px',
-        margin: '0 auto',
-        padding: '20px 16px 160px 16px',
-        color: 'var(--text-primary)',
-        lineHeight: 1.8
-      }}
-    >
+    <article className="rwd-article">
       {/* Pavilion Badge & Title */}
       <div style={{ textAlign: 'center', marginBottom: '24px' }}>
         <div
@@ -54,7 +46,7 @@ export default function BoothArticle({
 
         <h1
           style={{
-            fontSize: 'clamp(1.5rem, 5vw, 2.4rem)',
+            fontSize: 'clamp(1.5rem, 4.5vw, 2.6rem)',
             color: 'var(--text-title)',
             fontFamily: "var(--font-serif)",
             fontWeight: 700,
@@ -68,12 +60,12 @@ export default function BoothArticle({
 
         <p
           style={{
-            fontSize: '0.98rem',
+            fontSize: 'clamp(0.95rem, 2vw, 1.08rem)',
             color: 'var(--gold-primary)',
             fontStyle: 'italic',
             maxWidth: '680px',
             margin: '0 auto',
-            lineHeight: 1.55
+            lineHeight: 1.6
           }}
         >
           {booth.subtitle[language] || booth.subtitle.vi}
@@ -82,29 +74,14 @@ export default function BoothArticle({
 
       {/* Hero Exhibition Image */}
       <div
-        style={{
-          position: 'relative',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-          border: '1px solid var(--border-gold)',
-          marginBottom: '20px',
-          cursor: 'pointer',
-          background: 'var(--bg-secondary)'
-        }}
+        className="rwd-hero-img-box"
         onClick={() => onOpenLightbox(booth.heroImage, booth.heroCaption[language] || booth.heroCaption.vi)}
         title={language === 'vi' ? 'Nhấn để phóng to hình ảnh' : 'Click to view full image'}
       >
         <img
           src={booth.heroImage}
           alt={booth.title[language] || booth.title.vi}
-          style={{
-            width: '100%',
-            height: 'auto',
-            maxHeight: 'min(48vh, 440px)',
-            objectFit: 'cover',
-            display: 'block'
-          }}
+          className="rwd-hero-img"
         />
 
         <div
@@ -135,7 +112,7 @@ export default function BoothArticle({
       <p
         style={{
           textAlign: 'center',
-          fontSize: '0.85rem',
+          fontSize: '0.86rem',
           color: 'var(--text-muted)',
           fontStyle: 'italic',
           marginTop: '-10px',
@@ -145,15 +122,8 @@ export default function BoothArticle({
         {booth.heroCaption[language] || booth.heroCaption.vi}
       </p>
 
-      {/* Heritage Stats Grid: 2 columns on mobile */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-          gap: '10px',
-          marginBottom: '26px'
-        }}
-      >
+      {/* Heritage Stats Grid: Responsive 4 cols on desktop, 2 cols on mobile */}
+      <div className="rwd-stats-grid">
         {booth.stats.map((st, i) => (
           <div
             key={i}
@@ -161,7 +131,7 @@ export default function BoothArticle({
               background: 'var(--bg-card)',
               border: '1px solid var(--border-gold)',
               borderRadius: '12px',
-              padding: '10px 12px',
+              padding: '11px 13px',
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
@@ -195,25 +165,13 @@ export default function BoothArticle({
         ))}
       </div>
 
-      {/* Mobile Audio Tour Feature Callout Banner (Hình thức 3) */}
-      <div
-        style={{
-          background: 'var(--bg-card)',
-          border: '1.5px solid var(--border-gold)',
-          borderRadius: '16px',
-          padding: '16px',
-          marginBottom: '28px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '14px',
-          boxShadow: 'var(--shadow-card)'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      {/* Audio Tour Feature Callout Banner */}
+      <div className="rwd-audio-banner">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: '220px', flex: 1 }}>
           <div
             style={{
-              width: '44px',
-              height: '44px',
+              width: '46px',
+              height: '46px',
               borderRadius: '50%',
               background: 'var(--gold-gradient)',
               color: '#ffffff',
@@ -224,13 +182,13 @@ export default function BoothArticle({
               flexShrink: 0
             }}
           >
-            <Volume2 size={22} />
+            <Volume2 size={23} />
           </div>
           <div>
-            <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-title)' }}>
+            <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-title)' }}>
               {language === 'vi' ? 'Thuyết Minh Âm Thanh Tự Động' : 'Smart Museum Audio Tour'}
             </div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--gold-primary)', lineHeight: 1.4 }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--gold-primary)', lineHeight: 1.4 }}>
               {language === 'vi'
                 ? 'Website tự đọc bài viết và tự động cuộn màn hình theo từng đoạn'
                 : 'Auto-reads aloud and smoothly scrolls down paragraph by paragraph'}
@@ -240,20 +198,11 @@ export default function BoothArticle({
 
         <button
           onClick={isAudioPlaying ? onPauseAudio : onStartAudio}
+          className="rwd-audio-btn"
           style={{
-            width: '100%',
-            padding: '12px 18px',
-            borderRadius: '12px',
             background: isAudioPlaying ? 'var(--gold-subtle)' : 'var(--gold-gradient)',
             border: isAudioPlaying ? '1.5px solid var(--gold-accent)' : 'none',
             color: isAudioPlaying ? 'var(--gold-accent)' : '#ffffff',
-            fontWeight: 800,
-            fontSize: '0.92rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            cursor: 'pointer',
             boxShadow: isAudioPlaying ? 'none' : '0 4px 14px rgba(217, 119, 6, 0.35)'
           }}
         >
@@ -274,21 +223,21 @@ export default function BoothArticle({
       {/* Main Text Content Sections */}
       <div>
         {booth.sections.map((sec, secIdx) => (
-          <section key={sec.id} style={{ marginBottom: '32px' }}>
+          <section key={sec.id} style={{ marginBottom: '36px' }}>
             {/* Section Title */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
-                marginBottom: '14px',
+                marginBottom: '16px',
                 borderBottom: '1.5px solid var(--border-gold)',
                 paddingBottom: '8px'
               }}
             >
               <h2
                 style={{
-                  fontSize: '1.18rem',
+                  fontSize: 'clamp(1.15rem, 2.5vw, 1.32rem)',
                   fontFamily: "var(--font-serif)",
                   color: 'var(--text-title)',
                   margin: 0,
@@ -309,18 +258,13 @@ export default function BoothArticle({
                     key={p.id}
                     id={p.id}
                     onClick={() => onJumpToParagraph(p.id)}
+                    className="rwd-paragraph-card"
                     style={{
-                      position: 'relative',
-                      padding: '14px 16px',
-                      borderRadius: '14px',
                       background: isActive ? 'var(--bg-active-p)' : 'var(--bg-card)',
                       border: isActive
                         ? '2px solid var(--border-active-p)'
                         : '1px solid var(--border-subtle)',
-                      boxShadow: isActive ? 'var(--shadow-active)' : 'var(--shadow-card)',
-                      transition: 'all 0.25s ease',
-                      cursor: 'pointer',
-                      touchAction: 'manipulation'
+                      boxShadow: isActive ? 'var(--shadow-active)' : 'var(--shadow-card)'
                     }}
                     title={language === 'vi' ? 'Chạm để nghe đoạn này' : 'Click to listen to this section'}
                   >
@@ -349,7 +293,7 @@ export default function BoothArticle({
                       </div>
                     )}
 
-                    <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -375,13 +319,10 @@ export default function BoothArticle({
                       </button>
 
                       <p
+                        className="rwd-paragraph-text"
                         style={{
-                          margin: 0,
-                          fontSize: '0.98rem',
                           color: isActive ? 'var(--text-title)' : 'var(--text-primary)',
-                          fontWeight: isActive ? 600 : 400,
-                          lineHeight: 1.82,
-                          textAlign: 'justify'
+                          fontWeight: isActive ? 600 : 400
                         }}
                       >
                         {p[language] || p.vi}
@@ -413,7 +354,7 @@ export default function BoothArticle({
                   style={{
                     width: '100%',
                     height: 'auto',
-                    maxHeight: 'min(45vh, 400px)',
+                    maxHeight: 'min(45vh, 420px)',
                     objectFit: 'cover',
                     display: 'block'
                   }}
@@ -439,21 +380,7 @@ export default function BoothArticle({
 
       {/* Historical Callout Quote */}
       {booth.highlightQuote && (
-        <div
-          style={{
-            position: 'relative',
-            background: 'var(--bg-card)',
-            borderLeft: '4px solid var(--gold-accent)',
-            borderRadius: '0 14px 14px 0',
-            padding: '16px 18px',
-            margin: '30px 0',
-            fontStyle: 'italic',
-            fontSize: '0.98rem',
-            color: 'var(--gold-primary)',
-            lineHeight: 1.7,
-            boxShadow: 'var(--shadow-card)'
-          }}
-        >
+        <div className="rwd-quote-box">
           {booth.highlightQuote[language] || booth.highlightQuote.vi}
         </div>
       )}
@@ -462,67 +389,67 @@ export default function BoothArticle({
       <div
         style={{
           borderTop: '1px solid var(--border-gold)',
-          paddingTop: '24px',
-          marginTop: '32px',
+          paddingTop: '26px',
+          marginTop: '34px',
           display: 'flex',
           flexDirection: 'column',
           gap: '14px'
         }}
       >
-        <div style={{ display: 'grid', gridTemplateColumns: prevBooth && nextBooth ? '1fr 1fr' : '1fr', gap: '10px' }}>
-          {prevBooth && (
+        <div className="rwd-booth-nav-grid">
+          {prevBooth ? (
             <button
               onClick={() => {
                 onSelectBooth(prevBooth.id);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              className="rwd-booth-nav-btn"
               style={{
-                padding: '11px 14px',
+                padding: '11px 16px',
                 borderRadius: '12px',
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-gold)',
                 color: 'var(--text-title)',
-                fontSize: '0.82rem',
+                fontSize: '0.84rem',
                 fontWeight: 700,
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
                 gap: '6px',
                 cursor: 'pointer',
                 boxShadow: 'var(--shadow-card)'
               }}
             >
               <ArrowLeft size={15} />
-              <span>{language === 'vi' ? `Gian 0${prevBooth.boothNumber}` : `Zone 0${prevBooth.boothNumber}`}</span>
+              <span>{language === 'vi' ? `Gian 0${prevBooth.boothNumber}: ${prevBooth.tag.vi.split('•')[1] || prevBooth.tag.vi}` : `Zone 0${prevBooth.boothNumber}`}</span>
             </button>
-          )}
+          ) : <div />}
 
-          {nextBooth && (
+          {nextBooth ? (
             <button
               onClick={() => {
                 onSelectBooth(nextBooth.id);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              className="rwd-booth-nav-btn"
               style={{
-                padding: '11px 14px',
+                padding: '11px 16px',
                 borderRadius: '12px',
                 background: 'var(--gold-gradient)',
                 border: 'none',
                 color: '#ffffff',
-                fontSize: '0.82rem',
+                fontSize: '0.84rem',
                 fontWeight: 800,
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
                 gap: '6px',
                 cursor: 'pointer',
                 boxShadow: '0 4px 12px rgba(217, 119, 6, 0.35)'
               }}
             >
-              <span>{language === 'vi' ? `Gian 0${nextBooth.boothNumber}` : `Zone 0${nextBooth.boothNumber}`}</span>
+              <span>{language === 'vi' ? `Gian 0${nextBooth.boothNumber}: ${nextBooth.tag.vi.split('•')[1] || nextBooth.tag.vi}` : `Zone 0${nextBooth.boothNumber}`}</span>
               <ArrowRight size={15} />
             </button>
-          )}
+          ) : <div />}
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '6px' }}>
@@ -532,7 +459,7 @@ export default function BoothArticle({
               background: 'transparent',
               border: '1px dashed var(--gold-accent)',
               borderRadius: '10px',
-              padding: '9px 16px',
+              padding: '9px 18px',
               color: 'var(--gold-accent)',
               fontSize: '0.82rem',
               fontWeight: 700,
